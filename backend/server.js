@@ -5,6 +5,7 @@ const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 const { error } = require('console');
 require('dotenv').config();
+require('colors');
 
 const app = express();
 const server = http.createServer(app);
@@ -18,13 +19,17 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("MongoDb connected");
+    console.log("MongoDb connected".bgGreen.bold);
   })
   .catch((e) => {
-    console.error("MongoDb connection error: ", e);
+    console.error("MongoDb connection error: ".red.bold, e);
   });
 
 const PORT = process.env.PORT;
 server.listen(PORT,()=>{
-    console.log(`backend server is running on port: ${PORT}`);
+    console.log(`backend server is running on port: ${PORT}`.blue);
+})
+
+app.get('/',(req,res)=>{
+    res.send('Backend is running successfully')
 })
