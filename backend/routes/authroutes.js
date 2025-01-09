@@ -4,24 +4,20 @@ const router = express.Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-router.post('/register',async (req,res)=>{
-    const {name,email,password} = req.body;
-    try {
-        const hashedPassword = await bcrypt.hash(password,10);
-        const user = new User({name,email,password:hashedPassword});
-        await user.save();//mongoose save
-        res.status(201).json(
-            {
-                message:`${name} Registered Succsessfully`,
-            }
-    )
-    } catch (error) {
-        res.status(500).json(
-            {
-                error:"error registering the user",
-            }
-        )
-    }
+router.post("/register", async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ name, email, password: hashedPassword });
+    await user.save(); //mongoose save
+    res.status(201).json({
+      message: `${name} Registered Succsessfully`,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "error registering the user",//reduntent user not inserted to MongoDb
+    });
+  }
 });
 
 router.post('/login',async (req,res)=>{

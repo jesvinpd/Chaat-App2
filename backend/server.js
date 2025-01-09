@@ -35,6 +35,10 @@ server.listen(PORT,()=>{
     console.log(`backend server is running on port: ${PORT}`.blue);
 })
 
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
     res.send('Backend is running successfully')
 })
+
+const authRoutes = require('./routes/authroutes');
+app.use('/auth',authRoutes);
+
