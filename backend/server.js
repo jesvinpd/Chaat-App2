@@ -36,9 +36,9 @@ server.listen(PORT,()=>{
 })
 
 app.get('/api',(req,res)=>{
-    res.send('Backend is running successfully')
+    res.send('Backend api is running successfully')
 })
 
 const authRoutes = require('./routes/authroutes');
-app.use('/auth',authRoutes);
+app.use('/api/auth',authRoutes);
 

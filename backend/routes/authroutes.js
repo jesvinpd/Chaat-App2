@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      error: "error registering the user",//reduntent user not inserted to MongoDb
+      error: `error registering the user: ${name}`,//reduntent user not inserted to MongoDb
     });
   }
 });
